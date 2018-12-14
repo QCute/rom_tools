@@ -43,24 +43,24 @@ vendor(){
     fi;
 }
 
-vendor(){
-    ## vendor with brotli compress
-    if [ ! -f "$name/vendor.img" ] && [ -f "$name/vendor.new.dat.br" ];then
+system(){
+    ## system with brotli compress
+    if [ ! -f "$name/system.img" ] && [ -f "$name/system.new.dat.br" ];then
         # oreo 8.0~
         echo "decompress..."
-        brotli --decompress --in "$name/vendor.new.dat.br" --out "$name/vendor.new.dat"
+        brotli --decompress --in "$name/system.new.dat.br" --out "$name/system.new.dat"
     fi;
-    ## extract vendor if exists
-    if [ ! -f "$name/vendor.img" ] && [ -f "$name/vendor.new.dat" ];then
+    ## extract system if exists
+    if [ ! -f "$name/system.img" ] && [ -f "$name/system.new.dat" ];then
         ## convert to img
-        python3 "$tool/sdat2img/sdat2img.py" "$name/vendor.transfer.list" "$name/vendor.new.dat" "$name/vendor.img"
+        python3 "$tool/sdat2img/sdat2img.py" "$name/system.transfer.list" "$name/system.new.dat" "$name/system.img"
     fi;
     ## extract folder if exists
-    if [ -f "$name/vendor.img" ];then
+    if [ -f "$name/system.img" ];then
         ## extract to file
         echo "extract to file..."
-        rm -rf "$name/vendor"
-        python3 "$tool/ext4extract/ext4extract.py" -D "$name/vendor" "$name/vendor.img"
+        rm -rf "$name/system"
+        python3 "$tool/ext4extract/ext4extract.py" -D "$name/system" "$name/system.img"
     fi;
 }
 
