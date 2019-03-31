@@ -8,7 +8,7 @@ type cpio > /dev/null 2>&1 || { echo >&2 "require cpio but it's not installed.";
 
 ## file name directory
 if [ $# == 0 ];then
-    echo "run all|system|vendor|boot|context rom.zip"
+    echo "run [all | system | vendor | boot | context] rom.zip"
     exit
 elif [ "${2##*.}" != "zip" ];then
     echo "not a zip archive"
@@ -27,7 +27,7 @@ vendor(){
     if [ ! -f "$name/vendor.img" ] && [ -f "$name/vendor.new.dat.br" ];then
         # oreo 8.0~
         echo "decompress..."
-        brotli --decompress --in "$name/vendor.new.dat.br" --out "$name/vendor.new.dat"
+        brotli --decompress "$name/vendor.new.dat.br" --out "$name/vendor.new.dat"
     fi;
     ## extract vendor if exists
     if [ ! -f "$name/vendor.img" ] && [ -f "$name/vendor.new.dat" ];then
@@ -48,7 +48,7 @@ system(){
     if [ ! -f "$name/system.img" ] && [ -f "$name/system.new.dat.br" ];then
         # oreo 8.0~
         echo "decompress..."
-        brotli --decompress --in "$name/system.new.dat.br" --out "$name/system.new.dat"
+        brotli --decompress "$name/system.new.dat.br" --out "$name/system.new.dat"
     fi;
     ## extract system if exists
     if [ ! -f "$name/system.img" ] && [ -f "$name/system.new.dat" ];then
@@ -91,7 +91,7 @@ context(){
 }
 
 all(){
-    vendor
+    system
     vendor
     boot
     context
