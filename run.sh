@@ -27,7 +27,7 @@ vendor(){
     if [ ! -f "$name/vendor.img" ] && [ -f "$name/vendor.new.dat.br" ];then
         # oreo 8.0~
         echo "decompress..."
-        brotli --decompress "$name/vendor.new.dat.br" --out "$name/vendor.new.dat"
+        brotli -d "$name/vendor.new.dat.br" -o "$name/vendor.new.dat"
     fi;
     ## extract vendor if exists
     if [ ! -f "$name/vendor.img" ] && [ -f "$name/vendor.new.dat" ];then
@@ -48,7 +48,7 @@ system(){
     if [ ! -f "$name/system.img" ] && [ -f "$name/system.new.dat.br" ];then
         # oreo 8.0~
         echo "decompress..."
-        brotli --decompress "$name/system.new.dat.br" --out "$name/system.new.dat"
+        brotli -d "$name/system.new.dat.br" -o "$name/system.new.dat"
     fi;
     ## extract system if exists
     if [ ! -f "$name/system.img" ] && [ -f "$name/system.new.dat" ];then
